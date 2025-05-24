@@ -1,4 +1,8 @@
 import os
+
+if __name__ != "__main__":
+    sys.exit("⛔ Бот был импортирован как модуль. Выход.")
+
 import discord
 from discord.ext import commands
 from keep_alive import keep_alive  # импортируем веб-сервер
