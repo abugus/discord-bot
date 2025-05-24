@@ -72,6 +72,20 @@ async def варн(ctx, участник: discord.Member, *, причина="Б�
 
         await участник.ban(reason="3 предупреждения")
         await ctx.send(f"🔨 {участник.mention} был забанен за 3 предупреждения.")
+        
+@bot.command()
+@commands.has_permissions(ban_members=True)
+async def разбан(ctx, *, имя_или_id):
+    banned_users = await ctx.guild.bans()
+
+    for ban_entry in banned_users:
+        user = ban_entry.user
+        if str(user.id) == имя_или_id or user.name == имя_или_id:
+            await ctx.guild.unban(user)
+            await ctx.send(f"✅ Пользователь {user} был разбанен.")
+            return
+
+    await ctx.send("❌ Пользователь не найден в списке забаненных.")
 
 # === !очиститьварны @участник ===
 @bot.command()
